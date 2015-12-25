@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>	
+	<body>
+		<canvas id="mycanvas" width="200px" height="200px">
+			Your brower does not support html5
+		</canvas>
+	</body>
+
+	<script type="text/javascript">
+		var names = [	"13660240-d320-41d0-b6e3-eb78910c5ca4",
+						"ce90af88-6267-4074-8220-b27120c9cf60",
+						"6658ea22-2a0e-420d-b381-c44f28ce58c4",
+						"22b428d5-e405-4177-a82a-4b74530cc685"];
+		var mycanvas = document.getElementById("mycanvas");
+		var cxt = mycanvas.getContext("2d");
+
+		var step = 0;
+		recursive();
+
+		function recursive(){
+			var name = names[step];
+			step++;
+			step %= 4;
+			drawimg(name);
+			setTimeout(recursive, 100);
+		}
+
+		function drawimg(name){
+			cxt.clearRect(0, 0, mycanvas.width, mycanvas.height);
+			var img = new Image();
+			img.src = "emotion/" + name + ".png"
+			cxt.drawImage(img, 0, 0);
+		}
+	</script>
+
+</html>

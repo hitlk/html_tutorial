@@ -1,1 +1,38 @@
 <!DOCTYPE html>
+<html>
+	<script type="text/javascript">
+		function getLocation(){
+			if(navigator.geolocation){
+				navigator.geolocation.getCurrentPosition(showPosition);
+			}else{
+				alert("your browser not support geolocation");
+			}
+		}
+
+		function showPosition(position){
+			var latlon = position.coords.latitude + "," + position.coords.longitude;
+
+			var src = "http://maps.googleapis.com/maps/api/staticmap?center="
+						+latlon+"&zoom=14&size=400x300&sensor=false";
+			var holder = document.getElementById("mapholder");
+			var cxt = holder.getContext("2d");
+			var img = new Image();
+			img.src = src;
+			console.log(img.src);
+			img.onload = function(){
+				cxt.drawImage(img, 0, 0);
+			}
+			//document.getElementById("map-panel").innerHTML = "<img src=" + src + " />";
+		}
+	</script>
+	<body>
+		<div id="operate">
+			<button onclick="getLocation()">show</button>
+		</div>
+		<div id="map-panel">
+			<canvas id="mapholder" width="300px" height="300px">
+				Your brower does not support html5!
+			</canvas>
+		</div>
+	</body>
+</html>
